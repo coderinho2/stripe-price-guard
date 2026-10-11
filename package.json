@@ -1,0 +1,30 @@
+{
+  "name": "stripe-price-guard",
+  "version": "0.1.0",
+  "description": "Refuse a production build when your live Stripe prices or keys don't match what your site charges.",
+  "type": "module",
+  "bin": {
+    "stripe-price-guard": "src/cli.js"
+  },
+  "exports": "./src/check.js",
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "test": "node --test"
+  },
+  "peerDependencies": {
+    "stripe": ">=14"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "stripe",
+    "billing",
+    "ci",
+    "build",
+    "pricing"
+  ],
+  "license": "MIT"
+}

@@ -1,0 +1,10 @@
+{
+  "mode": "live",
+  "onlyWhen": { "env": "VERCEL_ENV", "equals": "production" },
+  "publishableKeyEnv": "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
+  "plans": [
+    { "name": "basic", "env": "STRIPE_BASIC_PRICE_ID", "currency": "usd", "unitAmount": 900, "interval": "month" },
+    { "name": "pro", "env": "STRIPE_PRO_PRICE_ID", "currency": "usd", "unitAmount": 1500, "interval": "month" },
+    { "name": "legacy", "env": "STRIPE_LEGACY_PRICE_ID", "currency": "usd", "unitAmount": 4900, "required": false }
+  ]
+}
