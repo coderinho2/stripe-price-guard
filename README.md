@@ -1,6 +1,6 @@
 # stripe-price-guard
 
-[![test](https://github.com/YOUR-USERNAME/stripe-price-guard/actions/workflows/test.yml/badge.svg)](https://github.com/coderinho2/stripe-price-guard/actions/workflows/test.yml)
+[![test](https://github.com/coderinho2/stripe-price-guard/actions/workflows/test.yml/badge.svg)](https://github.com/coderinho2/stripe-price-guard/actions/workflows/test.yml)
 
 Refuse a production build when your live Stripe configuration doesn't match
 what your site charges.
