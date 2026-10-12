@@ -5,22 +5,23 @@
 Refuse a production build when your live Stripe configuration doesn't match
 what your site charges.
 
-Pricing pages quote amounts from your code; Checkout charges whatever price
-ID is in your environment. When the two drift — a test price in production,
-an old price left in a variable, one price ID pasted into two plans — nothing
-fails until a customer is charged the wrong amount or a webhook files their
-subscription under the wrong plan. This tool makes that a failed build
-instead.
+Your pricing page shows amounts from your code. Checkout charges whatever
+price ID is in your environment. The two can drift apart. A test price can
+end up in production, an old price can stay in a variable, or one price ID
+can be pasted into two plans. Nothing fails until a customer is charged the
+wrong amount, or a webhook files their subscription under the wrong plan.
+This tool turns that into a failed build.
 
 ## Why this exists
 
-I built this for [Countorra](https://countorra.com), a personal-finance product
-with Stripe subscriptions. On launch day it refused the production build: one
-plan's environment variable held another plan's price ID, so a subscriber to
-one plan would have been recorded as the other. The fix took a minute; finding
-it after customers had paid would have meant wrong charges and wrong
-entitlements. Pricing configuration lives in two places — your code and your
-Stripe account — and this makes the build the moment they're compared.
+I built this for [Countorra](https://countorra.com), a personal-finance app
+with Stripe subscriptions. It is in development, not launched yet. Before
+launch, it refused a production build. One plan's environment variable held
+another plan's price ID, so a subscriber to one plan would have been
+recorded as the other. The fix took a minute. Finding it after customers had
+paid would have meant wrong charges and wrong entitlements. Pricing
+configuration lives in two places: your code and your Stripe account. This
+tool compares them every time you build.
 
 ## What it checks
 
@@ -30,7 +31,7 @@ For every plan in your config, against the live Stripe API (read-only):
 - the price exists, is **live** (or test, if you say so), **active**, and **recurring**
 - it bills every `interval` (default: month), per seat
 - currency and amount are exactly what your config says
-- **no price ID is used by two plans** — otherwise every webhook that names it is ambiguous
+- **no price ID is used by two plans**. Otherwise every webhook that names it is ambiguous.
 
 And for your keys:
 
@@ -74,7 +75,7 @@ have live keys.
 
 ## Example
 
-A real catch: one plan's variable held another plan's price.
+Example output: one plan's variable held another plan's price.
 
 ```
 stripe-price-guard:
@@ -87,7 +88,7 @@ stripe-price-guard: REFUSING TO BUILD —
   - legacy price_1Def… charges 1500, not 4900
 ```
 
-The deploy stops; the site that's already live keeps running.
+The deploy stops and nothing reaches production.
 
 ## Tests
 
@@ -95,7 +96,7 @@ The deploy stops; the site that's already live keeps running.
 npm test
 ```
 
-The tests use a fake Stripe client — no keys, no network.
+The tests use a fake Stripe client, so they need no keys and no network.
 
 ## License
 
